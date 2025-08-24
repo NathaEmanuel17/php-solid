@@ -19,6 +19,10 @@ final class CartItem
         }
     }
 
+    public function priceable(): Priceable { return $this->priceable; }
+    public function quantity(): int { return $this->quantity; }
+    public function discountPercent(): ?float { return $this->discountPercent; }
+
     public function description(): string
     {
         $desc = method_exists($this->priceable, 'name')

@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS carts (
+    id CHAR(32) PRIMARY KEY,
+    cart_discount_percent DECIMAL(5,4) DEFAULT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

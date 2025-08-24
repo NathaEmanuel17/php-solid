@@ -1,13 +1,15 @@
-version: "3.9"
-
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     container_name: minha-app-php
+    environment:
+      XDEBUG_MODE: coverage
+      TZ: America/Sao_Paulo
     volumes:
       - .:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - minha-app-net
 
@@ -24,6 +26,31 @@ services:
     networks:
       - minha-app-net
 
+  db:
+    image: mysql:8.0
+    container_name: minha-app-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: minha_app
+      MYSQL_USER: minha_user
+      MYSQL_PASSWORD: minha_pass
+      TZ: America/Sao_Paulo
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - minha-app-net
+
 networks:
   minha-app-net:
     driver: bridge
+
+volumes:
+  db_data: {}

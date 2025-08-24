@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        bootstrap="tests/bootstrap.php"
+        colors="true"
+        cacheResultFile=".phpunit.cache/test-results"
+        cacheDirectory=".phpunit.cache"
+>
+  <testsuites>
+    <testsuite name="Unit">
+      <directory>tests/Unit</directory>
+    </testsuite>
+    <testsuite name="Integration">
+      <directory>tests/Integration</directory>
+    </testsuite>
+  </testsuites>
+
+  <!-- Filtro de cobertura -->
+  <coverage>
+    <include>
+      <directory suffix=".php">app</directory>
+    </include>
+    <exclude>
+      <directory suffix=".php">vendor</directory>
+      <directory suffix=".php">tests</directory>
+      <directory suffix=".php">storage</directory>
+      <directory suffix=".php">bootstrap</directory>
+      <directory suffix=".php">config</directory>
+    </exclude>
+    <report>
+      <html outputDirectory="coverage-html"/>
+      <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="false"/>
+    </report>
+  </coverage>
+
+  <php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="APP_DEBUG" value="1"/>
+    <!-- Garante timezone para evitar avisos -->
+    <ini name="date.timezone" value="America/Sao_Paulo"/>
+  </php>
+</phpunit>
