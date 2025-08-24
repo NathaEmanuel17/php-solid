@@ -1,0 +1,41 @@
+# Arquivos de ambiente
+.env
+.env.*.local
+
+# Dependências
+/vendor/
+/node_modules/
+
+# Cache do Laravel
+/storage/*.key
+/storage/app/public
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/bootstrap/cache/*.php
+
+# Arquivos de compilação
+/public/hot
+/public/storage
+/public/js/*.map
+/public/css/*.map
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Docker
+docker-compose.override.yml
+
+# IDEs e sistemas
+.idea
+.vscode
+*.swp
+*~
+
+# Logs
+*.log
+*.cache
+*.tmp
+.DS_Store
+Thumbs.db
